@@ -16,6 +16,12 @@ class AuthController extends Controller
         $this->middleware('jwt', ['except' => ['login', 'GetUsers']]);
     }
 
+    /**
+     * Create a new User.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+
     public function CreateUser(){
         $user = new User(request() -> all());
         $user -> password = bcrypt($user -> password);
@@ -39,17 +45,32 @@ class AuthController extends Controller
         return $this->respondWithToken($token);
     }
 
+    /**
+     * Get all users.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function GetUsers() {
 
         return User::all();
     }
 
+    /**
+     * Get a User.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function GetUser(Request $req) {
         $user = User::find($req -> id);
 
         return response() -> json($user);
     }
 
+    /**
+     * Update user.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function UpdateUser(Request $re) {
         $user = User::find($re -> id);
         $user -> first_name = $re -> first_name;
@@ -66,6 +87,11 @@ class AuthController extends Controller
         }
     }
 
+    /**
+     * Delete user
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function DeleteUser($id) {
         $user = User::find($id);
         $result = $user -> delete();
@@ -74,16 +100,6 @@ class AuthController extends Controller
         } else {
         return response() -> json(['message' => 'User delete']);
         }
-    }
-
-    /**
-     * Get the authenticated User.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function me()
-    {
-        return response()->json(auth()->user());
     }
 
     /**
