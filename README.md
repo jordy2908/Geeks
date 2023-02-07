@@ -5,6 +5,9 @@ git clone https://github.com/jordy2908/Geeks.git
 
 ## Usage
 
+```bash
+cd geeks
+```
 ```laravel
 composer install
 ```
