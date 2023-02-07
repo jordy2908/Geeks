@@ -30,3 +30,8 @@ php artisan key:generate
 php artisan migrate
 php artisan serve
 ```
+
+# Test site
+```
+https://web.postman.co/
+```
